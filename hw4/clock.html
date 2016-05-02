@@ -1,0 +1,303 @@
+<!-- TEAM YELLOW -->
+<!-- Jake Hennessy -->
+<!-- Suzannah Loftin -->
+<!-- Casey Salvador -->
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Clock Webpage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+
+#container
+{
+position:relative;
+top:50px;
+margin:auto;
+width:202px;
+height:202px;
+}
+
+body
+{
+background: url(./worldbg.png);
+background-repeat:no-repeat;
+background-attachment: fixed;
+background-position: center center;
+background-size: cover;
+}
+
+.world_table
+{
+width:100%;
+height:100%;
+text-align:center;
+border: 3px groove #909090;
+}
+
+.tr_head
+{
+color:black;
+font-size:122%;
+font-weight:normal;
+font-family:"Georgia";
+}
+
+input
+{
+background:transparent;
+border:0;
+text-align:center;
+font-size:102%;
+color:black;
+font-weight:bold;
+font-family:"Georgia";
+}
+
+#clockcanvas
+{
+	background-image: url(./cface.gif);
+    background-repeat: no-repeat;
+}
+
+</style>
+
+</head>
+
+<body onload="initialize()">
+
+<div id="container">
+
+<table class="world_table">
+
+	<tr class="tr_head">
+		<td>New York</td>
+	</tr>
+	<tr>
+		<td><canvas width="202" height="202" id="clockcanvas"></canvas></td>
+	</tr>
+
+	<tr>
+		<td><input type="text" id="dtime" readonly="readonly" value=""></td>
+	</tr>
+
+</table>
+
+</div>
+
+</body>
+
+<script language="javascript">
+
+// ---------------------------------------------
+// Declare some variables used throughout
+// the clock program
+
+var canvas = null;
+var context = null;
+
+var x_i = 101;
+var y_i = 101;
+var r_i = 100;
+
+var sec = 0;
+	sec = ( sec < 10 ?  "0" : "" ) + sec;
+var min = 0;
+	min = ( min < 10 ?  "0" : "" ) + min;
+var hour = 0;
+
+// ------------------------------------------
+// For more information regarding javascript
+// date, see link provided below.
+//
+// http://www.w3schools.com/jsref/jsref_obj_date.asp
+
+var currentDate = new Date();
+console.log( currentDate );
+
+// ----------------------------------------------
+// Basic calculation to convert degree to radian.
+// For more information see link provided below.
+//
+// http://math.rice.edu/~pcmi/sphere/drg_txt.html
+
+function deg2radian( deg ) {
+	// ---------------------
+	// TODO:
+	// convert deg to radian
+	var radian = ( deg * ( Math.PI ) ) / 180;
+	return radian;
+
+
+} 
+
+// -----------------------------------------
+// HTML5: Guidelines for Web Developers
+// Course textbook: 
+// Chapter 5
+// Section 5.5 (draw line)
+
+function drawMinuteLine( radius, deg ) {
+
+	rad = deg2radian( deg - 90.0 );
+	
+	y = Math.floor( ( Math.sin( rad ) * radius ) + r_i );
+	x = Math.floor( ( Math.cos( rad ) * radius ) + r_i );
+	
+	context.lineWidth=3;
+	context.beginPath();
+	context.strokeStyle = '#480000';
+	context.lineTo( x_i, y_i );
+	context.lineTo( x, y );
+	context.stroke();
+	context.closePath();
+
+}
+
+
+// -----------------------------------------
+// HTML5: Guidelines for Web Developers
+// Course textbook: 
+// Chapter 5
+// Section 5.5 (draw line)
+
+function drawHourLine( radius, deg ) {
+	
+	deg = deg + ( 30 * ( min * 6.0 / 360.0 ) );
+
+	rad = deg2radian( deg - 90.0 );
+	
+	y = Math.floor( ( Math.sin( rad ) * radius ) + r_i );
+	x = Math.floor( ( Math.cos( rad ) * radius ) + r_i );
+	
+	context.lineWidth=4;
+	context.beginPath();
+	context.strokeStyle = '#002E5C';
+	context.lineTo( x_i, y_i );
+	context.lineTo( x, y );
+	context.stroke();
+	context.closePath();
+
+}
+
+// -----------------------------------------
+// HTML5: Guidelines for Web Developers
+// Course textbook: 
+// Chapter 5
+// Section 5.5 (draw line)
+	
+function drawSecondLine( radius, deg ) {
+
+	rad = deg2radian( deg - 90.0 );
+	
+	y = Math.floor( ( Math.sin( rad ) * radius ) + r_i );
+	x = Math.floor( ( Math.cos( rad ) * radius ) + r_i );
+	
+	context.lineWidth=2;
+	context.beginPath();
+	context.strokeStyle = '#C0C0C0';
+	context.lineTo( x_i, y_i );
+	context.lineTo( x, y );
+	context.stroke();
+	context.closePath();
+}
+
+function initialize() {
+
+	// -----------------------------------------
+	// HTML5: Guidelines for Web Developers
+	// Course textbook: 
+	// Chapter 5
+	// Section 5.1 (using html 5 canvas tag)
+
+	canvas = document.getElementById("clockcanvas");
+	context = canvas.getContext('2d');
+	
+	// ------------------------------------------
+	// For more information regarding javascript
+	// date, see link provided below.
+	//
+	// http://www.w3schools.com/jsref/jsref_obj_date.asp
+	
+	sec = currentDate.getSeconds();
+	min = currentDate.getMinutes();
+	hour = currentDate.getHours();
+	
+    if ( hour > 24 ) { 
+        hour = hour - 24;
+    }
+}
+
+// ------------------------------------------------
+// To understand how javascript timers work
+// see link provided below.
+//
+// http://www.w3schools.com/js/js_timing.asp
+
+var myVar = setInterval( function(){secondTimer()}, 1000 );
+
+function secondTimer() {
+
+	// --------------------------
+	// TODO:
+	// --------------------------
+	// update min, sec, and hour variables 
+	// - populate dtime input textbox
+	// - update drawing of second, minute, and hour hands
+		
+	context.clearRect( 0,0,x_i*2,y_i*2);
+	drawSecondLine(  ( r_i - 10 ), sec*6.0 );
+	drawMinuteLine( ( r_i - 20 ), min*6.0 ); 
+	drawHourLine( ( r_i - 30 ), hour*30.0 );
+
+	
+	var leadingZero = "0";
+	var amPm = ( hour >= 12 ) ? ( "pm" ) : ( "am" );
+	var totalTime = (hour + ":" +  min + ":" + sec + " " + amPm);
+	
+	if ( sec > 59 ) {
+		min = min + 1;
+		sec = (sec % 60);
+		if ( min > 59 ) {
+			hour = hour + 1;
+			min = ( min % 60);
+		}
+	}
+
+	if ( sec < 10 ) {
+		totalTime = (hour + ":" +  min + ":" + leadingZero + sec + " " + amPm);
+	}
+	
+	if ( min < 10 ) {
+		totalTime = (hour + ":" + leadingZero + min + ":" + sec + " " + amPm);
+		if ( sec < 10 ) {
+			totalTime = (hour + ":" + leadingZero + min + ":" + leadingZero + sec + " " + amPm);
+		}
+	}
+	
+	if ( hour == 0 ) {
+		hour = 12;
+	}
+	
+	if ( hour > 12 ) {
+		totalTime = ((hour - 12) + ":" +  min + ":" + sec + " " + amPm);
+		if ( sec < 10 ) {
+			totalTime = ((hour - 12) + ":" +  min + ":" + leadingZero + sec + " " + amPm);
+		}
+		if ( min < 10 ) {
+			totalTime = ((hour - 12) + ":" + leadingZero + min + ":" + sec + " " + amPm);
+			if ( sec < 10 ) {
+				totalTime = ((hour - 12) + ":" + leadingZero + min + ":" + leadingZero + sec + " " + amPm);
+			}
+		}
+	}	
+
+	sec = sec + 1;
+
+	document.getElementById("dtime").value = totalTime;
+}
+
+</script>
+
+</html>

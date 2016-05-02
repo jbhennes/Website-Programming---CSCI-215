@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Clock Webpage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+
+#container
+{
+position:relative;
+top:50px;
+margin:auto;
+width:808px;
+height:202px;
+}
+
+.world_table
+{
+width:100%;
+height:100%;
+text-align:center;
+border: 1px solid #909090;
+}
+
+body
+{
+background: url(./worldbg.png);
+background-repeat:no-repeat;
+background-attachment: fixed;
+background-position: center center;
+background-size: cover;
+}
+
+.tr_head
+{
+color:black;
+font-size:122%;
+font-weight:normal;
+font-family:"Georgia";
+}
+
+input
+{
+background:transparent;
+border:0;
+text-align:center;
+font-size:102%;
+color:black;
+font-weight:bold;
+font-family:"Georgia";
+}
+
+#nycanvas
+{
+	background: url(./cface.gif);
+	background-repeat:no-repeat;
+}
+
+#tokcanvas
+{
+	background: url(./cface.gif);
+	background-repeat:no-repeat;
+}
+
+#lacanvas
+{
+	background: url(./cface.gif);
+	background-repeat:no-repeat;
+}
+
+#loncanvas
+{
+	background: url(./cface.gif);
+	background-repeat:no-repeat;
+}
+
+</style>
+
+</head>
+
+<body onload="initialize()">
+
+<div id="container">
+	
+	<table class="world_table">
+	
+		<tr class="tr_head">
+			<td>New York</td>
+			<td>Tokyo</td>
+			<td>Los Angeles</td>
+			<td>London</td>
+		</tr>
+		
+		<tr>
+			<td><canvas width="202" height="202" id="nycanvas"></canvas></td>
+			<td><canvas width="202" height="202" id="tokcanvas"></canvas></td>
+			<td><canvas width="202" height="202" id="lacanvas"></canvas></td>
+			<td><canvas width="202" height="202" id="loncanvas"></canvas></td>
+		</tr>
+		
+		<tr>
+			<td><input type="text" id="0" readonly="readonly" value=""></td>
+			<td><input type="text" id="1" readonly="readonly" value=""></td>
+			<td><input type="text" id="2" readonly="readonly" value=""></td>
+			<td><input type="text" id="3" readonly="readonly" value=""></td>
+		</tr>
+	
+	</table>
+
+</div>
+
+</body>
+
+<script language="javascript">
+
+// ---------------------------------------------
+// Declare some variables used throughout
+// the clock program
+
+var canvas = new Array();
+var context = new Array();
+
+var x_i = 101;
+var y_i = 101;
+var r_i = 100;
+
+var sec = 0;
+var min = 0;
+var hour = [0,0,0,0];
+
+// ------------------------------------------
+// For more information regarding javascript
+// date, see link provided below.
+//
+// http://www.w3schools.com/jsref/jsref_obj_date.asp
+
+var currentDate = new Date();
+
+// ----------------------------------------------
+// Basic calculation to convert degree to radian.
+// For more information see link provided below.
+//
+// http://math.rice.edu/~pcmi/sphere/drg_txt.html
+
+function deg2radian( deg ) {
+
+	return deg * ( Math.PI / 180.0 );
+
+} 
+
+// -----------------------------------------
+// HTML5: Guidelines for Web Developers
+// Course textbook: 
+// Chapter 5
+// Section 5.5 (draw line)
+
+function drawMinuteLine( radius, deg ) {
+
+	rad = deg2radian( deg - 90.0 );
+	
+	y = Math.floor( ( Math.sin( rad ) * radius ) + r_i );
+	x = Math.floor( ( Math.cos( rad ) * radius ) + r_i );
+	
+	for ( var i=0; i<context.length; i++ ) {
+	
+		context[i].lineWidth=3;
+		context[i].beginPath();
+		context[i].strokeStyle = '#480000';
+		context[i].lineTo( x_i, y_i );
+		context[i].lineTo( x, y );
+		context[i].stroke();
+		context[i].closePath();
+	
+	}
+
+}
+
+
+// -----------------------------------------
+// HTML5: Guidelines for Web Developers
+// Course textbook: 
+// Chapter 5
+// Section 5.5 (draw line)
+
+function drawHourLine( radius, deg, i ) {
+	
+	deg = deg + ( 30 * ( min * 6.0 / 360.0 ) );
+
+	rad = deg2radian( deg - 90.0 );
+	
+	y = Math.floor( ( Math.sin( rad ) * radius ) + r_i );
+	x = Math.floor( ( Math.cos( rad ) * radius ) + r_i );
+	
+	context[i].lineWidth=4;
+	context[i].beginPath();
+	context[i].strokeStyle = '	#002E5C';
+	context[i].lineTo( x_i, y_i );
+	context[i].lineTo( x, y );
+	context[i].stroke();
+	context[i].closePath();
+
+}
+
+// -----------------------------------------
+// HTML5: Guidelines for Web Developers
+// Course textbook: 
+// Chapter 5
+// Section 5.5 (draw line)
+	
+function drawSecondLine( radius, deg ) {
+
+	rad = deg2radian( deg - 90.0 );
+	
+	y = Math.floor( ( Math.sin( rad ) * radius ) + r_i );
+	x = Math.floor( ( Math.cos( rad ) * radius ) + r_i );
+	
+	for ( var i=0; i<context.length; i++ ) {
+	
+		context[i].lineWidth=2;
+		context[i].beginPath();
+		context[i].strokeStyle = '#C0C0C0';
+		context[i].lineTo( x_i, y_i );
+		context[i].lineTo( x, y );
+		context[i].stroke();
+		context[i].closePath();
+	
+	}
+}
+
+function initialize() {
+
+	// -----------------------------------------
+	// HTML5: Guidelines for Web Developers
+	// Course textbook: 
+	// Chapter 5
+	// Section 5.1 (using html5 canvas tag)
+
+	canvas[0] = document.getElementById("nycanvas");
+	canvas[1] = document.getElementById("tokcanvas");
+	canvas[2] = document.getElementById("lacanvas");
+	canvas[3] = document.getElementById("loncanvas");
+	
+	context[0] = canvas[0].getContext('2d');
+	context[1] = canvas[1].getContext('2d');
+	context[2] = canvas[2].getContext('2d');
+	context[3] = canvas[3].getContext('2d');
+	
+	// ------------------------------------------
+	// For more information regarding javascript
+	// date, see link provided below.
+	//
+	// http://www.w3schools.com/jsref/jsref_obj_date.asp
+
+	// -----------------------------------------------
+	//	TODO for HW5 (TASK 1)
+	// -----------------------------------------------
+	// Initiallize hours array with current hour for
+	//
+	// hour[0] is NY Time
+	// hour[1] is Tokyo Time
+	// hour[2] is LA Time
+	// hour[3] is London Time
+	// REMEMBER: these index positions must be kept in order
+	
+	sec = currentDate.getSeconds();
+	min = currentDate.getMinutes();
+	
+			hour[0] = currentDate.getHours();
+			hour[1] = (currentDate.getHours() + 13);
+			hour[2] = (currentDate.getHours() + 21);
+			hour[3] = (currentDate.getHours() + 6);
+	
+	for ( var i=0; i<hour.length; i++ ) {
+	
+		if ( hour[i] > 24 ) hour[i] = (hour[i] - 24);
+	}
+}
+
+// ------------------------------------------------
+// To understand how javascript timers work
+// see link provided below.
+//
+// http://www.w3schools.com/js/js_timing.asp
+
+var myVar=setInterval(function(){secondTimer()},1000);
+
+function secondTimer() {
+
+	// -----------------------------------------------
+	//	TODO for HW5 (TASK 2)
+	// -----------------------------------------------
+	// Update sec, minute, and hour for each world clock
+		
+	// -----------------------------------------
+	// HTML5: Guidelines for Web Developers
+	// Course textbook: 
+	// Chapter 5
+	// Section 5.2 (draw rectangle -> clearRect() function
+	
+	var tmp_sec = null;
+	var tmp_min = null;
+
+	
+	for ( var i=0; i<context.length; i++ ) {
+		
+		context[i].clearRect( 0,0,x_i*2,y_i*2);
+	
+	}
+	
+	drawSecondLine(  ( r_i - 10 ), sec*6.0 );
+	drawMinuteLine( ( r_i - 20 ), min*6.0 ); 
+	
+	for ( var i=0; i<hour.length; i++ ) {
+		if ( hour[i] > 12 )
+		
+			drawHourLine( ( r_i - 30 ), ( ( hour[i]-12 ) *30.0 ) , i );
+			
+		else 
+		
+			drawHourLine( ( r_i - 30 ), ( hour[i]*30.0 ) , i );
+	
+	}
+	
+	for ( var i=0; i<hour.length; i++ ) {
+		if ( sec > 59 ) {
+			sec = sec - 60;
+			min = min + 1;
+			if ( min > 59 ) {
+				min = 0;
+				for ( var i=0; i<hour.length; i++ ) {
+					hour[i] = hour[i] + 1;
+					if ( hour[i] > 23 ) {
+						hour[i] = 0;
+					} else {
+						hour[i] = hour[i] + 1;
+					}
+				}
+			} else {
+				min = min + 1;
+			}
+		}
+	}
+
+
+
+	
+	sec = sec + 1;
+
+}
+
+</script>
+
+</html>

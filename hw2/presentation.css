@@ -1,0 +1,43 @@
+body
+{
+    background-color: rgb(200,200,200);
+}
+
+#container
+{
+    margin: auto;
+    width: 200px;
+    height: 120px;
+    
+}
+
+#header
+{
+    background-image: url(http://munsellb.people.cofc.edu/img/duke/dhead.jpg);
+    width: 200px;
+    height: 50px;
+    margin-top: 50px;
+}
+
+#buttons
+{
+    text-align: center;
+    background: white;
+    height: 35px;
+    width: 200px;
+}
+
+#animate
+{
+    background: white;
+    height: 115px;
+    width: 200px;
+    background-image: url(http://munsellb.people.cofc.edu/img/duke/T1.gif);
+    background-repeat: no-repeat;
+}
+
+img
+{
+    display: inline-block;
+    margin-right: 10px;
+}

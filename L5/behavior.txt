@@ -1,0 +1,12 @@
+//Task 1: In jsFiddle write a JavaScript program that uses the getElementsByTagName method to loop through all the ordered list <ol> element nodes defined in the structure file. In each iteration display the element node in the console (i.e. use console.log to print the element node). For this program you choose the looping structure (e.g. for, while, do-while) to accomplish this task.
+//Task 2: In jsFiddle modify the JavaScript program in Task 2 to loop through all the <ol> child nodes using the childNodes method. To accomplish this task a two-nested looping structure is required, i.e. the outer-loop iterates through all the <ol> element nodes, and the inner-loop iterates through all the child nodes of a <ol> element node. For each inner-loop iteration, additionally display the child node in the console. Likewise, you choose the looping structures (e.g. for, while, do-while) to accomplish this task.
+
+var tagList=document.getElementsByTagName('ol');
+
+for (var i=0; i<tagList.length; i++) {
+    console.log(tagList[i]);
+    var childList=document.getElementsByTagName('ol')[i].childNodes;
+    for (var j=0; j<childList.length; j++) {
+        console.log(childList[j]);
+    }
+}

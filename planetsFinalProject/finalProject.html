@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Gravity Across the Solar System</title>
+<link rel="stylesheet" type="text/css" href="finalProject.css">
+
+<!-- Preloading images -->
+<link rel="prefetch" href="mercury.jpg">
+<link rel="prefetch" href="venus.jpg">
+<link rel="prefetch" href="earth.jpg">
+<link rel="prefetch" href="mars.jpg">
+<link rel="prefetch" href="jupiter.jpg">
+<link rel="prefetch" href="saturn.jpg">
+<link rel="prefetch" href="uranus.jpg">
+<link rel="prefetch" href="neptune.jpg">
+<link rel="prefetch" href="pluto.jpg">
+
+</head>
+
+<body id="backdrop" onLoad="javascript:init()">
+
+<div id="wrapper">
+	<div id="banner">
+	</div>
+	<div id="planetList">
+		<form name="pickPlanet">
+    		<h2 id="planetPick">Pick a Planet:</h2>
+        	<input type="radio" id="mercury" name="planet" value="mercury.jpg"> Mercury<br>
+        	<input type="radio" id="venus" name="planet" value="venus.jpg"> Venus<br>
+        	<input type="radio" id="earth" name="planet" value="earth.jpg" checked> Earth<br>
+        	<input type="radio" id="mars" name="planet" value="mars.jpg"> Mars<br>
+        	<input type="radio" id="jupiter" name="planet" value="jupiter.jpg"> Jupiter<br>
+        	<input type="radio" id="saturn" name="planet" value="saturn.jpg"> Saturn<br>
+        	<input type="radio" id="uranus" name="planet" value="uranus.jpg"> Uranus<br>
+        	<input type="radio" id="neptune" name="planet" value="neptune.jpg"> Neptune<br>
+        	<input type="radio" id="pluto" name="planet" value="pluto.jpg"> Pluto<br> 
+    	</form>
+	</div>
+	<div id="main">
+		<h1 id="title">&mdash; Earth - (9.8m/s^2) &mdash;</h1>
+    	<p id="planetDesc"> Earth orbits the Sun at an average distance of about 150 million kilometers every 365.2564 mean solar days, or one sidereal year. From Earth, this gives an apparent movement of the Sun eastward with respect to the stars at a rate of about 1°/day, which is one apparent Sun or Moon diameter every 12 hours. Due to this motion, on average it takes 24 hours—a solar day—for Earth to complete a full rotation about its axis. 
+The Moon revolves with the Earth around a common barycenter every 27.32 days relative to the background stars. When combined with the Earth–Moon system's common revolution around the Sun, the period of the synodic month, from new moon to new moon, is 29.53 days. Viewed from the celestial north pole, the motion of Earth, the Moon and their axial rotations are all counterclockwise.
+		<br>
+ The orbital and axial planes are not precisely aligned: Earth's axis is tilted some 23.4 degrees from the perpendicular to the Earth–Sun plane (the ecliptic), and the Earth–Moon plane is tilted up to ±5.1 degrees against the Earth–Sun plane. Without this tilt, there would be an eclipse every two weeks, alternating between lunar eclipses and solar eclipses. The 'Hill sphere', or gravitational sphere of influence, of the Earth is about 1.5 Gm or 1,500,000 km in radius. This is the maximum distance at which the Earth's gravitational influence is stronger than the more distant Sun and planets. Objects must orbit the Earth within this radius, or they can become unbound by the gravitational perturbation of the Sun.</p>
+ 		<br>
+        <img src="../../Dropbox/Public/planetsFinalProject/formulas.png" alt="Formulas for Gravity">
+        </div>
+	<div id="animateArea">
+		<canvas id="animation"></canvas>
+        <div id="calc">
+        <table border="0">
+				<tr>
+					<td colspan="4">
+						<input id="output" type="text"/>
+					</td>
+				</tr>
+				<tr>
+					<td><button class="num" type="button">7</button></td>
+					<td><button class="num" type="button">8</button></td>
+					<td><button class="num" type="button">9</button></td>
+					<td><button id="clear" type="button">C</button></td>
+				</tr>
+				<tr>
+					<td><button class="num" type="button">4</button></td>
+					<td><button class="num" type="button">5</button></td>
+					<td><button class="num" type="button">6</button></td>
+					<td><button id="divide" type="button">/</button></td>
+				</tr>
+				<tr>
+					<td><button class="num" type="button">1</button></td>
+					<td><button class="num" type="button">2</button></td>
+					<td><button class="num" type="button">3</button></td>
+					<td><button id="multiply" type="button">*</button></td>
+					
+				</tr>
+				<tr>
+					<td><button class="num" type="button">0</button></td>
+					<td><button id="addition" type="button">+</button></td>
+					<td><button id="subtract" type="button">-</button></td>
+					<td><button id="equal" type="button">=</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+    <div id="question">
+    	<p>On this particular planet, what would be the speed of the apple if it free-fell for 2.5 sec?</p>
+	<div id="footer">
+    	<p>Copyright&copy; 2014. By Jake Hennessy.</p> 
+	</div>
+</div>
+<script type="text/javascript" src="finalProject.js"></script>
+</body>
+
+</html>

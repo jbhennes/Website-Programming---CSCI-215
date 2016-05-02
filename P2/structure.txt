@@ -1,0 +1,22 @@
+<body>
+    <div id="content">
+        <div id="header"></div>
+        <div id="main">
+            <p>Logon to Blog City</p>
+            <form name="logon_form"> 
+                <span class="logon">Username</span><input name="username" type="text" /><br/> 
+                <span class="logon">Password</span><input name="password" type="password" /><br/> 
+                <span id="clear_link"><a id="bttn" href="javascript:clear()">Reset</a></span>
+            </form>
+        </div>
+        <div id="footer">
+            <ul>
+                <li><a href="http://www.facebook.com">Facebook</a>
+                </li>
+                <li>|</li>
+                <li><a href="http://www.twitter.com">Twitter</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>

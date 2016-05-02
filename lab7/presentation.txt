@@ -1,0 +1,33 @@
+body 
+{
+    background:#fff;
+    padding:0;
+    margin:0;
+    font-weight: bold;
+    overflow:hidden;
+    background-color: black;
+}
+
+#container
+{
+    margin: auto;
+    width: 500px;
+    height: 400px;
+}
+
+#toolbar
+{
+    width: 500px;
+    height: 25px;
+    background-color: rgb(200,200,200);
+}
+
+#view
+{
+     padding-top: 105px;
+}
+
+select
+{
+    width: 105px;
+}

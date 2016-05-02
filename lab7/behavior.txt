@@ -1,0 +1,132 @@
+var container, stats;
+var camera, scene, renderer;
+var geometry, group;
+
+var mouseX = 0, mouseY = 0;
+var height = 500;
+var width = 400;
+
+var ncubes = 150;
+
+// ------------------------
+// TASK 2 (LAB 7)
+// ------------------------
+// Add Event Handler
+
+var handleCubes = document.getElementById('cubes');
+
+handleCubes.onchange = function(event) {
+    updateCubes();
+}
+
+function updateCubes() {
+    
+    var select = document.getElementById('cubes');
+    ncubes = select.options[select.selectedIndex].value; 
+
+    scene.remove( group );
+    initializeScene();
+    
+    
+    
+}
+
+// ------------------------
+// TASK 3 (LAB 7)
+// ------------------------
+// Add Event Listener
+
+var listenToView = document.getElementById('view');
+
+listenToView.addEventListener( 'mousemove', function(){
+    onMouseMove(event);
+}, false);
+
+
+function onMouseMove(event) {
+
+	mouseX = ( event.clientX - width/2 ) * 10;
+	mouseY = ( event.clientY - height/2 ) * 10;
+
+}
+
+function setup() {
+
+    initializeScene();
+    initializeRenderer();   
+    animate();
+    
+}
+
+// ------------------------
+// DO NOT MODIFY 
+// ------------------------
+
+function initializeScene() {
+
+	container = document.getElementById("view");
+
+	camera = new THREE.PerspectiveCamera( 60, width/height, 1, 10000 );
+	camera.position.z = 500;
+
+	scene = new THREE.Scene();
+
+	var geometry = new THREE.BoxGeometry( 100, 100, 100 );
+	var material = new THREE.MeshNormalMaterial( { overdraw: 0.5 } );
+
+	group = new THREE.Object3D();
+    
+    console.log( ncubes );
+
+	for ( var i = 0; i < ncubes; i ++ ) {
+
+		var mesh = new THREE.Mesh( geometry, material );
+		mesh.position.x = Math.random() * 2000 - 1000;
+		mesh.position.y = Math.random() * 2000 - 1000;
+		mesh.position.z = Math.random() * 2000 - 1000;
+		mesh.rotation.x = Math.random() * 2 * Math.PI;
+		mesh.rotation.y = Math.random() * 2 * Math.PI;
+		mesh.matrixAutoUpdate = false;
+		mesh.updateMatrix();
+		group.add( mesh );
+
+	}
+
+    console.log( window.innerWidth);
+    console.log( window.innerHeight);
+    scene.add( group );
+
+}
+
+function initializeRenderer() {
+    
+    renderer = new THREE.CanvasRenderer();
+    renderer.setClearColor( 0xffffff );
+	renderer.setSize( 500,400 );
+	container.appendChild( renderer.domElement );
+
+	stats = new Stats();
+	stats.domElement.style.position = 'absolute';
+	stats.domElement.style.top = '0px';
+	stats.domElement.style.zIndex = 100;
+	container.appendChild( stats.domElement );
+}
+
+function animate() {
+    
+   
+	requestAnimationFrame( animate );
+
+	camera.position.x += ( mouseX - camera.position.x ) * .05;
+	camera.position.y += ( - mouseY - camera.position.y ) * .05;
+	camera.lookAt( scene.position );
+
+	var currentSeconds = Date.now();
+	group.rotation.x = Math.sin( currentSeconds * 0.0007 ) * 0.5;
+	group.rotation.y = Math.sin( currentSeconds * 0.0003 ) * 0.5;
+	group.rotation.z = Math.sin( currentSeconds * 0.0002 ) * 0.5;
+
+	renderer.render( scene, camera );
+	stats.update();
+
+}

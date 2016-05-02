@@ -1,0 +1,35 @@
+<body>
+    <div id="content">
+        <div id="header"></div>
+        <div id="main">
+            <p>Blog City Bloggers</p>
+            
+                <table name="blog_users">
+                       <tr>
+                           <th>First</th>
+                           <th>Last</th>
+                           <th>Middle Initial</th>
+                        </tr>
+                        <tr>
+                           <td>Brent</td>
+                           <td>Munsell</td>
+                           <td>C</td>
+                        </tr>
+                </table>
+            
+                <span id="bttn_link"><a id="add_bttn" href="javascript:add()">+ Add</a></span>
+            
+            <span id="bttn_link"><a id="del_bttn" href="javascript:remove()">- Remove</a></span>
+           
+        </div>
+        <div id="footer">
+            <ul>
+                <li><a href="http://www.facebook.com">Facebook</a>
+                </li>
+                <li>|</li>
+                <li><a href="http://www.twitter.com">Twitter</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>

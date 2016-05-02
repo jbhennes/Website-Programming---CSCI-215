@@ -1,0 +1,286 @@
+console.clear();
+
+//--------------------------
+// 
+// Node elements (buttons and textbox)
+//
+//--------------------------
+var output = document.getElementById("output");
+var numBttns = document.getElementsByClassName("num");
+
+ // ---------------------------------------
+// TODO: HW6 Task 1
+// Create the following variables (must use the names provided below)
+// - divideBttn
+// - multiplyBttn
+// - subtractBttn
+// - additionBttn
+// - equalBttn
+// - clearBttn
+
+var divideBttn = document.getElementById("divide");
+var multiplyBttn = document.getElementById("multiply");
+var subtractBttn = document.getElementById("subtract");
+var additionBttn = document.getElementById("addition");
+var equalBttn = document.getElementById("equal");
+var clearBttn = document.getElementById("clear");
+
+
+//--------------------------
+// 
+// Calculator Variables 
+// Do not modify
+//
+//--------------------------
+var N = [];    // number array
+var Op = [];    // operation array
+var tmp = '';    // temporary variable (numEvents method)
+
+//--------------------------
+// 
+// function that initializes web calculator
+// called by onload event in body tag
+//
+//--------------------------
+function init() {
+    
+	// Make the output readonly 
+	// (i.e. the user cannot directly 
+	// enter a number)
+    output.readOnly=true; 
+
+	// Reset variables and set
+	// ouput to zero
+    clear();
+    
+	// add event listeners to each number button.
+    for ( var i=0; i<numBttns.length; i++ ) {
+        
+        // ---------------------------------------
+        // TODO: HW6 Task 2
+        // Set up number button event listeners
+        
+        numBttns[i].addEventListener('click', function(){ numEvent(event); }, false );
+        
+    }
+    
+    // ---------------------------------------
+    // TODO: HW6 Task 2
+    // Set up operation event listeners
+    // 1. divide button
+    // 2. multiply button
+    // 3. subtract button
+    // 4. addition button
+    // 5. clear button
+    // 6. equal button
+    
+    divideBttn.addEventListener('click', function(){ divide(); }, false );
+    multiplyBttn.addEventListener('click', function(){ multiply(); }, false );
+    subtractBttn.addEventListener('click', function(){ subtract(); }, false );
+    additionBttn.addEventListener('click', function(){ addition(); }, false );
+    equalBttn.addEventListener('click', function(){ equal(); }, false );
+    clearBttn.addEventListener('click', function(){ clear(); }, false );
+    
+}
+
+//--------------------------
+// 
+// function to handle clear event
+//
+//--------------------------
+function clear() {
+    
+    console.log("C");
+    output.value=0;
+    tmp='';
+    N=[];
+    Op=[];
+    
+}
+
+//--------------------------
+// 
+// function to handle addition event
+//
+//--------------------------
+function addition() {
+        
+    console.log("+");
+    
+    if ( isNumeric( tmp ) ) {
+        
+        N.push( parseInt( tmp ) );
+        Op.push( "+" );
+        
+    }
+    
+    tmp = '';
+    
+}
+
+//--------------------------
+// 
+// function to handle subtract event
+//
+//--------------------------
+function subtract() {
+    
+    console.log("-");
+    
+    if ( isNumeric( tmp ) ) {
+        
+        N.push( parseInt( tmp ) );
+        Op.push( "-" );
+        
+    }
+    
+    tmp = '';   
+    
+}
+
+//--------------------------
+// 
+// Function to handle multiply event
+// Do not modify
+//
+//--------------------------
+function multiply() {
+    
+    // For debugging
+    console.log("*");
+    
+    // Is number? Yes: update arrays
+    if ( isNumeric( tmp ) ) {
+        
+        N.push( parseInt( tmp ) );
+        Op.push( "*" );
+        
+    }
+    
+    tmp = '';
+    
+}
+
+//--------------------------
+// 
+// Function to handle divide event
+// Do not modify
+//
+//--------------------------
+function divide() {
+    
+    // for debugging
+    console.log("/");
+    
+    if ( isNumeric( tmp ) ) {
+        
+        N.push( parseInt( tmp ) );
+        Op.push( "/" );
+        
+    }
+    
+    tmp = '';
+    
+}
+
+function equal() {
+    
+    // for debugging
+    console.log("=");
+    
+    // push last number into number array
+    if ( isNumeric( tmp ) ) {
+        
+        N.push( parseInt( tmp ) );
+        
+    }
+    
+    tmp = '';
+
+    // for debugging    
+    console.log( N );
+    console.log( Op );
+	
+	var total = 0;
+    
+    // ----------------------------------
+    // TODO: HW6 Task 3
+    // Loop through operation array (Op) 
+    // and number array (N) to calculate
+	// total value displayed to user.
+	//
+	// To display output: output.value = total;
+    // 
+    // Example:
+    // 10 + 15 - 5 * 2 = 40
+    // N = [ 10, 15, 5, 2 ]
+    // Op = [ '+', '-', '*' ]
+    //
+    // If there is an error, display 'ERROR' to user
+	// e.g. output.value = 'ERROR'
+    
+    if ( N.length > 0 && ( Op.length == N.length-1 ) ) {
+    
+        total = N[0];
+        
+        for ( var i=0; i<Op.length; i++ ) {
+            
+            if ( Op[i] === "+" ) {
+                
+                total += N[i+1];
+                
+            } else if ( Op[i] === "-" ) {
+                
+                total -= N[i+1];
+                
+            } else if ( Op[i] === "*" ) {
+                
+                total *= N[i+1];
+                
+            } else if ( Op[i] === "/" ) {
+                
+                total /= N[i+1];
+                
+            }
+            
+        }
+        
+        output.value = total;
+        
+    } else {
+        
+         output.value = "Error";
+        
+    }
+    
+	N=[];
+	Op=[];
+}
+
+//--------------------------
+// 
+// Function to handle number events
+// Do not modify
+//
+//--------------------------
+function numEvent(event) {
+    
+    // concatenate entered number
+    tmp = tmp + event.srcElement.outerText;
+    
+    // update calculator output (textbox)
+    output.value=tmp;
+    
+}
+
+//--------------------------
+// 
+// Function to determine if value is a number
+// Do not modify
+//
+//--------------------------
+function isNumeric( val ) {
+    
+    return ( val.length === 0 || isNaN( val ) ) ? false : true;
+    
+}

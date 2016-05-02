@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Lab 5</title>
+  </head>
+  <body>
+<p title="paragraph title">A pretty image:
+<img src="http://munsellb.people.cofc.edu/img/prettypicture.jpg"
+alt="Pretty Picture"> </p>
+<hr>
+<h2 title="first header 2">How about a nice ordered list!</h2> <ol title="first ordered list">
+<li>This little piggy <li>This little piggy <li>This little piggy
+Charleston</li>
+<li>This little piggy
+<li>This little piggy </ol>
+went to market</li>
+went to 215 class</li>
+went to an expensive restaurant in Downtown
+ate too much at Indian Buffet.</li> got lost</li>
+<h2>Unordered list</h2>
+<ul title="first unordered list">
+<li>First element</li> <li>Second element</li> <li>Third element</li>
+</ul> <hr>
+<h2>Nested Lists!</h2> <ul>
+<li>Things to to today: <ol>
+<li>Walk the dog</li> <li>Feed the cat</li> <li>Mow the lawn</li>
+</ol> </li>
+<li>Things to do tomorrow: <ol>
+<li>Lunch with mom</li> <li>Feed the hamster</li> <li>Clean kitchen</li>
+</ol> </li>
+</ul>
+<p>And finally, how about some <a href="http://www.yahoo.com">Links?</a></p>
+  </body>
+</html>

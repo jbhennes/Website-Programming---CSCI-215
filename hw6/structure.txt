@@ -1,0 +1,38 @@
+<body onload="init()">
+	<div id="container">
+		<div id="main">
+			<table border="0">
+				<tr>
+					<td colspan="4">
+						<input id="output" type="text"/>
+					</td>
+				</tr>
+				<tr>
+					<td><button class="num" type="button">7</button></td>
+					<td><button class="num" type="button">8</button></td>
+					<td><button class="num" type="button">9</button></td>
+					<td><button id="clear" type="button">C</button></td>
+				</tr>
+				<tr>
+					<td><button class="num" type="button">4</button></td>
+					<td><button class="num" type="button">5</button></td>
+					<td><button class="num" type="button">6</button></td>
+					<td><button id="divide" type="button">/</button></td>
+				</tr>
+				<tr>
+					<td><button class="num" type="button">1</button></td>
+					<td><button class="num" type="button">2</button></td>
+					<td><button class="num" type="button">3</button></td>
+					<td><button id="multiply" type="button">*</button></td>
+					
+				</tr>
+				<tr>
+					<td><button class="num" type="button">0</button></td>
+					<td><button id="addition" type="button">+</button></td>
+					<td><button id="subtract" type="button">-</button></td>
+					<td><button id="equal" type="button">=</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>

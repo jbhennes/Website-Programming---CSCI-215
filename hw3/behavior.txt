@@ -1,0 +1,68 @@
+// --------------------------
+// Generate random number in [0 10]
+// 
+// Do not modify JS code below
+// -------------------------- 
+
+var num2guess = Math.floor(Math.random()*10);
+
+console.log( num2guess );
+
+// --------------------------
+// Task 1 JS code goes below
+// --------------------------
+var enteredNumber = (-1);
+
+
+
+
+
+// --------------------------
+// Task 2 JS code goes below
+// --------------------------
+while (enteredNumber != num2guess) {
+    if (enteredNumber != num2guess) {
+        incorrectGuess();
+    } 
+    if (!continueGame() == false) {
+        break;
+    } else {
+        youWin();
+    }
+}
+
+
+
+
+
+// --------------------------
+// Do not modify JS code below
+// --------------------------
+
+function incorrectGuess() {
+    
+    alert('The guessed number (' + enteredNumber + ' ) is not correct!');
+    
+}
+
+function youWin() {
+    
+    alert('Good job you guessed ' + num2guess);
+    
+}
+
+// function to ask the user to input 
+// a number in [0 10]
+function askForNumber() {
+    
+    return prompt("Please Enter Number between 0 and 10", 0);
+    
+}
+
+// function to ask the user if 
+// they want to continue the game
+function continueGame() {
+    
+    return confirm("Continue to play game?");
+    
+}
